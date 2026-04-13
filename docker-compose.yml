@@ -1,0 +1,21 @@
+services:
+  auton-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auton-ui
+    ports:
+      - "8501:8501"
+    environment:
+      AUTON_LLM_BASE_URL: ${AUTON_LLM_BASE_URL:-http://host.docker.internal:8000/v1}
+      AUTON_LLM_MODEL: ${AUTON_LLM_MODEL:-bonsai-8b-v0.1.gguf}
+      AUTON_LLM_API_KEY: ${AUTON_LLM_API_KEY:-local}
+      AUTON_FIRECRAWL_URL: ${AUTON_FIRECRAWL_URL:-http://host.docker.internal:3002}
+      AUTON_BONSAI_START_CMD: "echo 'docker mode: start externally'"
+      AUTON_FIRECRAWL_START_CMD: "echo 'docker mode: start externally'"
+      AUTON_FIRECRAWL_STOP_CMD: "echo 'docker mode: stop externally'"
+    volumes:
+      - ./artifacts:/app/artifacts
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped

@@ -1,0 +1,4 @@
+streamlit>=1.44,<2
+openai>=1.75,<2
+playwright>=1.52,<2
+html2text>=2024.2.26

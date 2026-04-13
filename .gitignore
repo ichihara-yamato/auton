@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.streamlit/
+models/
+playwright-report/
+artifacts/
+build/
+.auton-pids/
+vendor/
+*.log
