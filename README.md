@@ -3,33 +3,6 @@
 Streamlit + Playwright + Bonsai 8B による、自然言語指示ベースのローカル Web テストツールです。
 各ステップのスクリーンショットを `artifacts/` 配下へ保存できます。
 
-
-## 1. Python仮想環境とhuggingface_hub CLIのセットアップ（初回のみ）
-
-以下の手順を「bash scripts/bootstrap_docker.sh」を実行する前に一度だけ行ってください。
-
-1. Python仮想環境の作成（任意・推奨）
-	```bash
-	python3 -m venv .venv
-	source .venv/bin/activate
-	python -m pip install --upgrade pip
-	```
-2. pipがなければインストール
-	```bash
-	python3 -m ensurepip --upgrade || true
-	```
-3. huggingface_hub CLI (hf) のインストール
-	```bash
-	pip install --user --upgrade huggingface_hub
-	export PATH="$HOME/.local/bin:$PATH"
-	```
-4. hfコマンドが使えるか確認
-	```bash
-	hf --help
-	```
-
----
-
 ## 3分クイックスタート
 
 
@@ -44,20 +17,17 @@ cd auton
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
+
 # 2. pipがなければインストール
 python3 -m ensurepip --upgrade || true
+
 # 3. huggingface_hub CLI (hf) のインストール
 pip install --user --upgrade huggingface_hub
 export PATH="$HOME/.local/bin:$PATH"
+
 # 4. hfコマンドが使えるか確認
 hf --help
 
-# ----------------------------------------------------------
-
-```bash
-```
-git clone https://github.com/ichihara-yamato/auton.git
-cd auton
 bash scripts/bootstrap_docker.sh
 ```
 
