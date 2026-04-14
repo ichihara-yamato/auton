@@ -22,8 +22,7 @@ python -m pip install --upgrade pip
 python3 -m ensurepip --upgrade || true
 
 # 3. huggingface_hub CLI (hf) のインストール
-pip install --user --upgrade huggingface_hub
-export PATH="$HOME/.local/bin:$PATH"
+pip install --upgrade huggingface_hub
 
 # 4. hfコマンドが使えるか確認
 hf --help
