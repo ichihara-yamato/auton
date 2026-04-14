@@ -52,6 +52,7 @@ curl -sS -X POST http://localhost:3002/v1/scrape -H "Content-Type: application/j
 - `models/`, `build/`, `artifacts/`, `.venv/` は含めない（`.gitignore` 済み）
 - 受け手は「1コマンドで起動」できる入口を用意する
 
+
 ## 最短起動（推奨）
 
 ```bash
@@ -72,6 +73,38 @@ AUTON_LLM_BASE_URL="https://YOUR_OPENAI_COMPAT_ENDPOINT/v1" \
 AUTON_LLM_MODEL="YOUR_MODEL_NAME" \
 bash scripts/bootstrap_docker.sh
 ```
+
+---
+
+## 停止方法・再起動方法
+
+### Docker で起動した場合
+
+停止:
+
+```bash
+docker compose down
+```
+
+再起動（バックグラウンドで起動）:
+
+```bash
+docker compose up -d
+```
+
+### ローカル実行（python/streamlit）で起動した場合
+
+停止:
+
+- Streamlit を起動したターミナルで `Ctrl+C` を押す
+
+再起動:
+
+```bash
+streamlit run app.py
+```
+
+---
 
 ## 1. Python 仮想環境
 
