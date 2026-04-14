@@ -5,10 +5,31 @@ Streamlit + Playwright + Bonsai 8B による、自然言語指示ベースのロ
 
 ## 3分クイックスタート
 
+
 前提:
 
+- Python 3.8以上（pip含む）がインストールされていること
+	- Macの場合: 標準で入っていることが多いですが、`python3 --version` で確認
+	- なければ https://www.python.org/downloads/ からインストール
 - Docker Desktop または OrbStack が起動している
 - （任意）`http://localhost:8000/v1` に OpenAI互換LLM API がある
+
+## 1. Python環境とhuggingface_hub CLIのセットアップ（初回のみ）
+
+```bash
+# Pythonがなければインストール（Mac: Homebrew例）
+which python3 || brew install python
+
+# pipがなければインストール
+python3 -m ensurepip --upgrade || true
+
+# huggingface_hub CLI (hf) をインストール
+python3 -m pip install --user --upgrade huggingface_hub
+export PATH="$HOME/.local/bin:$PATH"
+hf --help  # コマンドが使えるか確認
+```
+
+---
 
 手順:
 
@@ -53,7 +74,17 @@ curl -sS -X POST http://localhost:3002/v1/scrape -H "Content-Type: application/j
 - 受け手は「1コマンドで起動」できる入口を用意する
 
 
-## 最短起動（推奨）
+
+## 2. リポジトリのクローン
+
+```bash
+git clone https://github.com/ichihara-yamato/auton.git
+cd auton
+```
+
+---
+
+## 3. 最短起動（推奨）
 
 ```bash
 bash scripts/bootstrap_docker.sh
