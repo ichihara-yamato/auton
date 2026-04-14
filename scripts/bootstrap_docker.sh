@@ -23,6 +23,9 @@ if ! curl -fsS -X POST "http://localhost:3002/v1/scrape" \
   bash ./scripts/run_firecrawl_server.sh
 fi
 
+# --- 追加: モデル・サーバーバイナリ自動セットアップ ---
+bash ./scripts/auton_auto_setup.sh
+
 echo "[3/4] LLM APIを確認/起動中..."
 if ! curl -fsS -H "Authorization: Bearer local" "http://localhost:8000/v1/models" >/dev/null 2>&1; then
   if [[ -x ./build/prism-llama-cpp/bin/llama-server && -f ./models/bonsai-8b-v0.1.gguf ]]; then
