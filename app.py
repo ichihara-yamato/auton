@@ -2071,6 +2071,7 @@ def render_sidebar() -> dict[str, Any]:
             st.sidebar.error(text)
         st.session_state.service_notice = None
 
+
     st.sidebar.markdown("**サービス操作**")
     bonsai_active = bonsai_ok or _is_service_process_active("bonsai")
     firecrawl_active = firecrawl_ok or _is_service_process_active("firecrawl")
@@ -2088,6 +2089,19 @@ def render_sidebar() -> dict[str, Any]:
         check_firecrawl_status.clear()
         st.session_state.service_notice = ("success", msg) if ok else ("error", msg)
         st.rerun()
+
+    # --- 新規追加: サービスWebページへのリンク ---
+    st.sidebar.markdown("**サービスWebページ**")
+    # Bonsai (OpenAI互換API) のWebページ（例: /docs など）
+    bonsai_url = LLM_BASE_URL.rstrip("/")
+    if bonsai_url.endswith(":8000/v1"):
+        bonsai_url = bonsai_url[:-3]  # /v1 を除去
+    bonsai_web_url = bonsai_url + "/docs"
+    st.sidebar.markdown(f"[Bonsai API ドキュメント]({bonsai_web_url})", unsafe_allow_html=True)
+
+    # Firecrawl のWebページ（例: / ルート）
+    firecrawl_url = FIRECRAWL_BASE_URL.rstrip("/")
+    st.sidebar.markdown(f"[Firecrawl Webページ]({firecrawl_url})", unsafe_allow_html=True)
 
     return {
         "headed": headed,
