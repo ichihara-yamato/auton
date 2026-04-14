@@ -2090,16 +2090,18 @@ def render_sidebar() -> dict[str, Any]:
         st.session_state.service_notice = ("success", msg) if ok else ("error", msg)
         st.rerun()
 
-    # --- 新規追加: サービスWebページへのリンク ---
+
+    # --- サービスWebページへのリンク修正 ---
     st.sidebar.markdown("**サービスWebページ**")
-    # Bonsai (OpenAI互換API) のWebページ（例: /docs など）
+    # Bonsai (OpenAI互換API) のWebページ（http://localhost:8000 など）
     bonsai_url = LLM_BASE_URL.rstrip("/")
     if bonsai_url.endswith(":8000/v1"):
         bonsai_url = bonsai_url[:-3]  # /v1 を除去
-    bonsai_web_url = bonsai_url + "/docs"
-    st.sidebar.markdown(f"[Bonsai API ドキュメント]({bonsai_web_url})", unsafe_allow_html=True)
+    elif bonsai_url.endswith("/v1"):
+        bonsai_url = bonsai_url[:-3]
+    st.sidebar.markdown(f"[Bonsai API ドキュメント]({bonsai_url})", unsafe_allow_html=True)
 
-    # Firecrawl のWebページ（例: / ルート）
+    # Firecrawl のWebページ（http://localhost:3002 など）
     firecrawl_url = FIRECRAWL_BASE_URL.rstrip("/")
     st.sidebar.markdown(f"[Firecrawl Webページ]({firecrawl_url})", unsafe_allow_html=True)
 
