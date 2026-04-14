@@ -3,37 +3,59 @@
 Streamlit + Playwright + Bonsai 8B による、自然言語指示ベースのローカル Web テストツールです。
 各ステップのスクリーンショットを `artifacts/` 配下へ保存できます。
 
-## 3分クイックスタート
 
+## 1. Python仮想環境とhuggingface_hub CLIのセットアップ（初回のみ）
 
-前提:
+以下の手順を「bash scripts/bootstrap_docker.sh」を実行する前に一度だけ行ってください。
 
-- Python 3.8以上（pip含む）がインストールされていること
-	- Macの場合: 標準で入っていることが多いですが、`python3 --version` で確認
-	- なければ https://www.python.org/downloads/ からインストール
-- Docker Desktop または OrbStack が起動している
-- （任意）`http://localhost:8000/v1` に OpenAI互換LLM API がある
-
-## 1. Python環境とhuggingface_hub CLIのセットアップ（初回のみ）
-
-```bash
-# Pythonがなければインストール（Mac: Homebrew例）
-which python3 || brew install python
-
-# pipがなければインストール
-python3 -m ensurepip --upgrade || true
-
-# huggingface_hub CLI (hf) をインストール
-python3 -m pip install --user --upgrade huggingface_hub
-export PATH="$HOME/.local/bin:$PATH"
-hf --help  # コマンドが使えるか確認
-```
+1. Python仮想環境の作成（任意・推奨）
+	```bash
+	python3 -m venv .venv
+	source .venv/bin/activate
+	python -m pip install --upgrade pip
+	```
+2. pipがなければインストール
+	```bash
+	python3 -m ensurepip --upgrade || true
+	```
+3. huggingface_hub CLI (hf) のインストール
+	```bash
+	pip install --user --upgrade huggingface_hub
+	export PATH="$HOME/.local/bin:$PATH"
+	```
+4. hfコマンドが使えるか確認
+	```bash
+	hf --help
+	```
 
 ---
+
+## 3分クイックスタート
+
 
 手順:
 
 ```bash
+git clone https://github.com/ichihara-yamato/auton.git
+cd auton
+
+# --- ここでPython仮想環境とhuggingface_hub CLIのセットアップ（初回のみ） ---
+# 1. Python仮想環境の作成（任意・推奨）
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+# 2. pipがなければインストール
+python3 -m ensurepip --upgrade || true
+# 3. huggingface_hub CLI (hf) のインストール
+pip install --user --upgrade huggingface_hub
+export PATH="$HOME/.local/bin:$PATH"
+# 4. hfコマンドが使えるか確認
+hf --help
+
+# ----------------------------------------------------------
+
+```bash
+```
 git clone https://github.com/ichihara-yamato/auton.git
 cd auton
 bash scripts/bootstrap_docker.sh
@@ -74,17 +96,7 @@ curl -sS -X POST http://localhost:3002/v1/scrape -H "Content-Type: application/j
 - 受け手は「1コマンドで起動」できる入口を用意する
 
 
-
-## 2. リポジトリのクローン
-
-```bash
-git clone https://github.com/ichihara-yamato/auton.git
-cd auton
-```
-
----
-
-## 3. 最短起動（推奨）
+## 最短起動（推奨）
 
 ```bash
 bash scripts/bootstrap_docker.sh
